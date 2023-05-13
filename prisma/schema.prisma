@@ -11,30 +11,43 @@ datasource db {
 }
 
 model Utilisateur {
-  Id        Int      @id @default(autoincrement())
+  Id        Int       @id @default(autoincrement())
   nom       String
-  email     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  published Boolean   @default(false)
+  articles  Article[]
+}
+
+enum UserRole {
+  ADMIN
+  AUTHOR
 }
 
 model Article {
-  Id        Int      @id @default(autoincrement())
+  Id        Int           @id @default(autoincrement())
   titre     String
   contenu   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  published Boolean       @default(false)
+  author    Utilisateur   @relation(fields: [AUTHOR], references: [Id], onDelete: Cascade)
+  AUTHOR    Int
+  Comments  Commentaire[]
+  Category  Categorie[]   @relation("CategorieArticle")
 }
 
 model Categorie {
-  Id  Int    @id @default(autoincrement())
-  nom String
+  Id       Int       @id @default(autoincrement())
+  nom      String
+  articles Article[] @relation("CategorieArticle")
 }
 
 model Commentaire {
-  Id      Int    @id @default(autoincrement())
-  email   String
-  contenu String
+  Id        Int     @id @default(autoincrement())
+  email     String
+  contenu   String
+  article   Article @relation(fields: [articleId], references: [Id])
+  articleId Int
 }
