@@ -1,0 +1,38 @@
+GET http://localhost:3000/articles?take=11&skip=0 HTTP/1.1
+
+###
+
+GET http://localhost:3000/articles/1 HTTP/1.1
+
+###
+
+POST http://localhost:3000/articles HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "test",
+    "content": "contentTest",
+    "image": "imageTest",
+    "createdAt": "20023",
+    "updatedAt": "2345",
+    "published": "true"
+}
+
+###
+
+PATCH http://localhost:3000/articles HTTP/1.1
+Content-Type: application/json
+
+
+{
+    "id" : 2,
+    "title": "test",
+    "content": "contentTest",
+    "image": "imageTest",
+    "createdAt": "20023",
+    "updatedAt": "2345",
+    "published": "true"
+}
+###
+
+DELETE http://localhost:3000/articles/1 HTTP/1.1
