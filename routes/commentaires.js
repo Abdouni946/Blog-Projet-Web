@@ -1,149 +1,82 @@
 const express = require("express")
 const router = express.Router()
 
-const comments = [
-    {
-        title: "Article 1",
-        content: "This is the content of Article 1",
-        image: "image1.jpg",
-        createdAt: new Date(2022, 0, 1),
-        updatedAt: new Date(2022, 2, 15),
-        published: true,
-    },
-    {
-        title: "Article 2",
-        content: "This is the content of Article 2",
-        image: "image2.jpg",
-        createdAt: new Date(2022, 1, 10),
-        updatedAt: new Date(2022, 3, 5),
-        published: false,
-    },
-    {
-        title: "Article 3",
-        content: "This is the content of Article 3",
-        image: "image3.jpg",
-        createdAt: new Date(2022, 3, 20),
-        updatedAt: new Date(2022, 4, 25),
-        published: true,
-    },
-    {
-        title: "Article 4",
-        content: "This is the content of Article 4",
-        image: "image4.jpg",
-        createdAt: new Date(2022, 5, 5),
-        updatedAt: new Date(2022, 7, 1),
-        published: true,
-    },
-    {
-        title: "Article 5",
-        content: "This is the content of Article 5",
-        image: "image5.jpg",
-        createdAt: new Date(2022, 7, 10),
-        updatedAt: new Date(2022, 9, 15),
-        published: false,
-    },
-    {
-        title: "Article 6",
-        content: "This is the content of Article 6",
-        image: "image6.jpg",
-        createdAt: new Date(2022, 9, 20),
-        updatedAt: new Date(2022, 11, 5),
-        published: true,
-    },
-    {
-        title: "Article 7",
-        content: "This is the content of Article 7",
-        image: "image7.jpg",
-        createdAt: new Date(2022, 11, 10),
-        updatedAt: new Date(2023, 0, 1),
-        published: true,
-    },
-    {
-        title: "Article 8",
-        content: "This is the content of Article 8",
-        image: "image8.jpg",
-        createdAt: new Date(2023, 0, 5),
-        updatedAt: new Date(2023, 2, 20),
-        published: false,
-    },
-    {
-        title: "Article 9",
-        content: "This is the content of Article 9",
-        image: "image9.jpg",
-        createdAt: new Date(2023, 2, 25),
-        updatedAt: new Date(2023, 4, 1),
-        published: true,
-    },
-    {
-        title: "Article 10",
-        content: "This is the content of Article 10",
-        image: "image10.jpg",
-        createdAt: new Date(2023, 4, 5),
-        updatedAt: new Date(2023, 5, 10),
-        published: true,
-    },
-];
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-router.get("/", (req, res) => {
+
+router.get("/", async (req, res) => {
     try {
         const take = parseInt(req.query.take);
         const skip = parseInt(req.query.skip);
-
-        const ret_comments = comments.splice(skip, skip + take);
-        return res.json({ ret_comments });
+        const comments = await prisma.comment.findMany({ take, skip, });
+        return res.json({ comments });
     } catch (error) {
         console.error(error);
+        return res.status(500).json({ message: `Server error: ${error}` });
     }
 })
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
+        const comments = await prisma.comment.findUnique({ where: { id } },);
 
-        if (id < 0 || id >= comments.length) {
+        if (!comments) {
             console.log("id invalid!");
             return res.json({ "message": `${id} is an id invalid!` });
         }
 
-        const comment = comments[id];
-
-        return res.json({ article });
+        return res.json({ comment });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ "message": `Server error: ${error}` });
     }
 })
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     try {
-        const comment = {
-            title: req.body.title,
-            content: req.body.content,
-            image: req.body.image,
-            createdAt: req.body.createdAt,
-            published: req.body.published,
-            updatedAt: req.body.updatedAt,
-        }
-
-        comments.push(comment);
-
+        const { email, content, articlesId } = req.body;
+        const createcomment = await prisma.comment.create({
+            data: {
+                email,
+                content,
+                articlesId,
+            },
+        })
         return res.json({ "message": "Ajout avec success" });
 
-
-
     } catch (error) {
         console.error(error);
         return res.status(500).json({ "message": `Server error: ${error}` });
     }
 })
 
-router.delete("/:id", (req, res) => {
+router.patch("/", async (req, res) => {
+
     try {
         const id = parseInt(req.params.id);
-        const index = articles.findIndex(comment => comment.id === id);
-        if (index !== -1) {
-            articles.splice(index, 1);
-            res.status(200).json({ " message": "commentaire suprrimé avec succès" })
+        const { email, content, articleId } = req.body;
+        const updatecomments = await prisma.comment.update({
+            where: { id },
+            data: { email, content, articleId },
+        });
+        res.status(200).json({ "message ": "comment mis à jour avec succés " })
+    }
+
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ "message": `Server error: ${error}` });
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const comments = await prisma.comment.findUnique({ where: { id } });
+        if (comments) {
+            await prisma.comment.delete({ where: { id } });
+            res.status(200).json({ " message": "comment suprrimé avec succès" })
         }
         else
             res.status(400).json({ "message": "aticle non trouvé" })
