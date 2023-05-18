@@ -1,8 +1,8 @@
-GET http://localhost:3000/articles?take=11&skip=0 HTTP/1.1
+GET http://localhost:3000/commentaires?take=11&skip=0 HTTP/1.1
 
 ###
 
-GET http://localhost:3000/commentaires/1 HTTP/1.1
+GET http://localhost:3000/commentaires/2 HTTP/1.1
 
 ###
 
@@ -11,8 +11,8 @@ POST http://localhost:3000/commentaires HTTP/1.1
 
 ###
 
-PATCH http://localhost:3000/articles HTTP/1.1
+PATCH http://localhost:3000/commentaires HTTP/1.1
 
 ###
 
-DELETE http://localhost:3000/articles/1 HTTP/1.1
+DELETE http://localhost:3000/commentaires/1 HTTP/1.1

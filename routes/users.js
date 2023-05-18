@@ -20,10 +20,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const Users = await prisma.User.findUnique({ where: { id } },);
+    const User = await prisma.User.findUnique({ where: { id } },);
 
-    if (!Users
-    ) {
+    if (!User) {
       console.log("id invalid!");
       return res.json({ "message": `${id} is an id invalid!` });
     }

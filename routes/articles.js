@@ -20,13 +20,13 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const Articles = await prisma.Article.findUnique({ where: { id } },);
+        const Article = await prisma.Article.findUnique({ where: { id }, });
 
-        if (!Articles) {
+        if (!Article) {
             console.log("id invalid!");
             return res.json({ "message": `${id} is an id invalid!` });
         }
-        
+
         return res.json({ Article });
     } catch (error) {
         console.error(error);
@@ -37,19 +37,24 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         const { title, content, image, createdAt, updatedAt, published } = req.body;
-        const createArticle = await prisma.Article.create({
+
+        const createArticle = await prisma.article.create({
             data: {
-                id,
                 title,
                 content,
                 image,
-                createdAt,
+                createdAt: new Date(createdAt),
+                updatedAt: new Date(updatedAt),
                 published,
-                updatedAt,
-            },
-        })
-        return res.json({ "message": "Ajout avec success" });
+                author: {
+                    connect: {
+                        id: 10 // Replace with the actual author ID
+                    }
+                }
+            }
+        });
 
+        return res.json({ "message": "Ajout avec succès" });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ "message": `Server error: ${error}` });

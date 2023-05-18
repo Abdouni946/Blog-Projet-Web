@@ -7,10 +7,20 @@ GET http://localhost:3000/articles/1 HTTP/1.1
 ###
 
 POST http://localhost:3000/articles HTTP/1.1
+Content-Type: application/json
 
+{
+    "title": "Quos tempora facere libero dignissimos assumenda animi dicta.",
+    "content": "Atque quod in sint iste quisquam odit repellat magni. Explicabo iusto quisquam deserunt quos at aliquam perspiciatis repellendus neque. Ipsum alias amet. Eveniet atque excepturi reprehenderit",
+    "image": "https://loremflickr.com/640/480",
+    "createdAt": "2023-05-17 21:23:40.344",
+    "updatedAt": "2023-05-17 21:23:40.344",
+    "published": true
+}
 ###
 
 PATCH http://localhost:3000/articles HTTP/1.1
+
 ###
 
 DELETE http://localhost:3000/articles/1 HTTP/1.1

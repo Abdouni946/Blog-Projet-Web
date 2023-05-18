@@ -10,7 +10,6 @@ const categoriesRouter = require('./routes/categories');
 const app = express();
 
 app.use(express.json());
-
 app.use("/articles", articlesRouter);
 app.use("/users", usersRouter);
 app.use("/commentaires", commentairesRouter);
