@@ -10,8 +10,7 @@ import Categories from "./component/Categories";
 import PostsCat from "./component/PostsCat";
 import Myarticle from "./component/Myarticle";
 
-
-
+  
 import {
   BrowserRouter as Router,
   Route,

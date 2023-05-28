@@ -43,14 +43,16 @@ export default function Singlepost() {
               <p className="mb-3 font-normal text-lg text-gray-700 dark:text-gray-400">
                 {post.content}
               </p>
-              <p className="mb-3 font-semibold text-lg text-black-700 dark:text-black-400">
+              <p className="mb-3 font-semibold text-lg text-green-700 dark:text-green-400">
                 Created At:
               </p>
-              <p className="inline-flex self-end">{post.createdAt}</p>
-              <p className="mb-3 font-semibold text-lg text-black-700 dark:text-black-400">
+
+              <p className="inline-flex self-end">{post.createdAt?.split("T")[0]}  / { post.createdAt?.split("T")[1].split(":")[0]}:{ post.createdAt?.split("T")[1].split(":")[1]} </p>
+              <p className="mb-3 font-semibold text-lg text-green-700 dark:text-green-400">
                 Author:
               </p>
-              <p className="inline-flex self-end">{post.author?.name}</p>
+
+              <p className="inline-flex self-end ">{post.author?.name}</p>
             </div>
           </a>
         </div>
@@ -66,7 +68,7 @@ export default function Singlepost() {
               class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
               placeholder="Write a comment..." required></textarea>
           </div>
-          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Post Comment</button>
+          <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Post Comment</button>
 
         </form>
 

@@ -24,8 +24,8 @@ export default function MyArticles({ title, image, content, createdAt, key }) { 
                         />
                     </CardHeader>
                     <CardBody>
-                        <Typography variant="h6" color="blue" className="uppercase mb-4">Posts</Typography>
-                        <Typography variant="h4" color="blue-gray" className="mb-2">
+                        <Typography variant="h6" color="black" className="uppercase mb-4">Post</Typography>
+                        <Typography variant="h4" color="black-gray" className="mb-2">
                             {title}
                         </Typography>
                         <Typography color="gray" className="font-normal mb-8">

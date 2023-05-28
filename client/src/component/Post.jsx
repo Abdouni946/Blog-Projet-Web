@@ -27,22 +27,22 @@ export default function Post(post) {
         </Typography>
       </CardBody>
       {post.categories && (
-          <div className=" flex justify-end">
-            {post.categories.map(category => (
-              <Link to={`/categories/${category.id}`}>
-                <button
-                  key={category.id}
-                  className="badge badge-outline px-2 py-1 m-1 text-xs text-white bg-cyan-500 border border-cyan-500 rounded cursor-pointer transition-colors duration-200"
-                >
-                  {category.name}
-                </button>
-              </Link>
-            ))}
-          </div>
-        )}
-      <CardFooter className="pt-0">
+        <div className=" flex justify-end">
+          {post.categories.map(category => (
+            <Link to={`/categories/${category.id}`}>
+              <button
+                key={category.id}
+                className="badge badge-outline px-3 py-1 m-1 text-xs text-white bg-green-900 border border-green-900 rounded cursor-pointer transition-colors duration-200"
+              >
+                {category.name}
+              </button>
+            </Link>
+          ))}
+        </div>
+      )}
+      <CardFooter className="mt-2 pt-0">
         <Link to={`/post/${keyid}`}>
-          <Button>Read More</Button>
+          <Button className="bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/50">Read More</Button>
         </Link>
       </CardFooter>
     </Card>

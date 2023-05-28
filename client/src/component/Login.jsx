@@ -51,16 +51,15 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setAuthenticated(false);
-    window.location.href = '/';
+    window.location.href = '/'; 
   };
 
   return (
     <div className="h-screen md:flex">
-      <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
+      <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-green-800 to-green-200 i justify-around items-center hidden">
         <div>
           <h1 className="text-white font-bold text-4xl font-sans">BlogyBee</h1>
           <p className="text-white mt-1"> Read our latest Blogs NOW using the link below </p>
-          <button type="submit" className="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2"><Link to="/MostReviews">Read More</Link></button>
         </div>
         <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         <div className="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -89,8 +88,8 @@ function App() {
             </svg>
             <input className="pl-2 outline-none border-none" type="password" value={password} onChange={handlePasswordChange} required placeholder="Password" />
           </div>
-          <button type="submit" className="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
-          <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer"> <Link to="/Signup">Register ?</Link></span>
+          <button type="submit" className="block w-full bg-green-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
+          <span className="text-sm ml-2 hover:green-500 cursor-pointer"> <Link to="/Signup">Register ?</Link></span>
         </form>
       </div>
     </div>

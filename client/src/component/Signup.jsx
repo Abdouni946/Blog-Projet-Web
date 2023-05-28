@@ -36,11 +36,10 @@ function Signup() {
 
   return (
     <div class="h-screen md:flex">
-      <div class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
+      <div class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-green-800 to-green-200 i justify-around items-center hidden">
         <div>
           <h1 class="text-white font-bold text-4xl font-sans">BloggyBee</h1>
           <p class="text-white mt-1">The Best Blog Poster #1 Web</p>
-          <button type="submit" class="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2"><Link to="/MostReviews">Read More</Link></button>
         </div>
         <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
         <div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -59,18 +58,18 @@ function Signup() {
           </div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
             </svg>
             <input class="pl-2 outline-none border-none" type="text" name="email" placeholder="Email Address" value={data.email} onChange={handleChange} />
           </div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
             </svg>
             <input class="pl-2 outline-none border-none" type="text" name="password" placeholder="Password" value={data.password} onChange={handleChange} />
           </div>
-          <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Sign Up</button>
-          <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">
+          <button type="submit" class="block w-full bg-green-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Sign Up</button>
+          <span class="text-sm ml-2 text-green-700 dark:text-green-400 cursor-pointer">
             <Link to="/login"> Already Have An Account ? </Link>
           </span>
         </form>
