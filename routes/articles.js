@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     try {
         const take = parseInt(req.query.take);
         const skip = parseInt(req.query.skip);
-        const Articles = await prisma.Article.findMany({ take, skip, });
+        const Articles = await prisma.Article.findMany({ take, skip, include: { author: true, categories: true, comments: true } });
         return res.json({ Articles });
     } catch (error) {
         console.error(error);
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const Article = await prisma.Article.findUnique({ where: { id }, });
+        const Article = await prisma.Article.findUnique({ where: { id }, include: { author: true, categories: true, comments: true } });
 
         if (!Article) {
             console.log("id invalid!");
@@ -36,19 +36,17 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const { title, content, image, createdAt, updatedAt, published } = req.body;
-
+        const { title, content, image, categories, userId } = req.body;
         const createArticle = await prisma.article.create({
             data: {
                 title,
                 content,
                 image,
-                createdAt: new Date(createdAt),
-                updatedAt: new Date(updatedAt),
-                published,
+                categories: { connect: categories },
+                published: true,
                 author: {
                     connect: {
-                        id: 10 // Replace with the actual author ID
+                        id: parseInt(userId)
                     }
                 }
             }

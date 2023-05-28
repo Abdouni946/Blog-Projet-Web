@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const take = parseInt(req.query.take);
     const skip = parseInt(req.query.skip);
-    const Users = await prisma.User.findMany({ take, skip, });
+    const Users = await prisma.User.findMany({ take, skip, include: { articles: true } });
     return res.json({ Users });
   } catch (error) {
     console.error(error);
@@ -17,22 +17,24 @@ router.get("/", async (req, res) => {
   }
 })
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
+  const id = Number(req.params.id);
   try {
-    const id = parseInt(req.params.id);
-    const User = await prisma.User.findUnique({ where: { id } },);
+    const user = await prisma.user.findUnique({
+      where: { id }, include: { articles: true }
+    });
 
-    if (!User) {
-      console.log("id invalid!");
-      return res.json({ "message": `${id} is an id invalid!` });
+
+    if (user) {
+      res.send(user);
+    } else {
+      res.status(404).send('User not found');
     }
-
-    return res.json({ User });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ "message": `Server error: ${error}` });
+    res.status(500).send('Error retrieving user from the database');
   }
-})
+});
 
 router.post("/", async (req, res) => {
   try {
@@ -53,14 +55,13 @@ router.post("/", async (req, res) => {
   }
 })
 
-router.patch("/", async (req, res) => {
+router.patch("/:id", async (req, res) => {
 
   try {
     const id = parseInt(req.params.id);
     const { name, email, password } = req.body;
     const updateUsers = await prisma.User.update({
-      where: { id },
-      data: { name, email, password, role: "AUTHOR" },
+      where: { id }, data: { name, email, password, role: "AUTHOR" },
     });
     res.status(200).json({ "message ": "User mis à jour avec succés " })
   }
@@ -86,6 +87,5 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json({ "message": `Server error: ${error}` });
   }
 })
-
 
 module.exports = router;

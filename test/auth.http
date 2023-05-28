@@ -1,0 +1,19 @@
+### 
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+    "email": "zakarhhhiae1@gmail.com",
+    "password": "zakahhhriae1",
+    "name":"zakahhriae"
+}
+
+###
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "email": "zakariae1@gmail.com",
+    "password": "zakariae1"
+}
+

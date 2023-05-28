@@ -20,14 +20,14 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const comments = await prisma.comment.findUnique({ where: { id } },);
+        const comments = await prisma.comment.findUnique({ where: { id } });
 
         if (!comments) {
             console.log("id invalid!");
             return res.json({ "message": `${id} is an id invalid!` });
         }
 
-        return res.json({ comment });
+        return res.json({ comments });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ "message": `Server error: ${error}` });
