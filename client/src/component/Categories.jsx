@@ -2,17 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const categories = [
-  { id: 1, name: 'Outdoors' },
-  { id: 2, name: 'Movies' },
-  { id: 3, name: 'Home' },
-  { id: 4, name: 'Shoes' },
-  { id: 5, name: 'Electronics' },
-  { id: 6, name: 'Cats' },
-  { id: 7, name: 'Music' },
-  { id: 8, name: 'Series' },
-  { id: 9, name: 'Health' },
-  { id: 10, name: 'Computers' },
- 
+  { id: 1, name: 'Outdoors', total: 39 },
+  { id: 2, name: 'Movies', total: 30 },
+  { id: 3, name: 'Home', total: 20 },
+  { id: 4, name: 'Shoes', total: 17 },
+  { id: 5, name: 'Electronics', total: 29 },
+  { id: 6, name: 'Cats', total: 25 },
+  { id: 7, name: 'Music', total: 18 },
+  { id: 8, name: 'Series', total: 26 },
+  { id: 9, name: 'Health', total: 30 },
+  { id: 10, name: 'Computers', total: 15 },
+
 ];
 
 const images = [
@@ -38,10 +38,10 @@ function App() {
           to={`/categories/${category.id}`}
           className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
         >
-          {category.name}
+          {category.name} ({category.total})
         </Link>
       ))}
-      
+
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {images.map((image, index) => (
           <div key={index}>
