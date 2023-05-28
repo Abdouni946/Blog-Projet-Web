@@ -10,6 +10,8 @@ import Categories from "./component/Categories";
 import PostsCat from "./component/PostsCat";
 import Myarticle from "./component/Myarticle";
 
+
+
   
 import {
   BrowserRouter as Router,
@@ -18,10 +20,10 @@ import {
 } from "react-router-dom";
 
 function App() {
-
+ 
   return (
     <Router>
-      <Navbar />
+      <Navbar  />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />

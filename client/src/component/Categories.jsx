@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React from 'react';
+import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-
+/*
 const categories = [
   { id: 1, name: 'Outdoors', total: 39 },
   { id: 2, name: 'Movies', total: 30 },
@@ -14,6 +16,10 @@ const categories = [
   { id: 10, name: 'Computers', total: 15 },
 
 ];
+*/
+
+
+
 
 const images = [
   "https://images.pexels.com/photos/1117132/pexels-photo-1117132.jpeg?auto=compress&cs=tinysrgb&w=400",
@@ -29,16 +35,27 @@ const images = [
 ];
 
 function App() {
+
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get("http://localhost:3001/categories?take=100&skip=0");
+      setCategories(res.data.categorys);
+      console.log(res.data.categorys);
+    };
+    getCats();
+  }, []);
+
   return (
     <div className="flex flex-wrap items-center justify-center py-4 md:py-8">
       <Link to="/categories" className="text-green-700 hover:text-white border border-green-600 bg-white hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-500 dark:bg-gray-900 dark:focus:ring-green-800">All categories</Link>
       {categories.map(category => (
         <Link
-          key={category.id}
+        key={category.id}
           to={`/categories/${category.id}`}
           className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
         >
-          {category.name} ({category.total})
+          {category.name} ({category.articles.length})
         </Link>
       ))}
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { handleLogout } from './Login';
+
 
 const UserAccountDetails = () => {
   const [name, setname] = useState('');
@@ -10,6 +10,7 @@ const UserAccountDetails = () => {
   const [password, setPassword] = useState('');
   const location = useLocation();
   const path = location.pathname.split('/')[2];
+
 
   const handleUpdateAccount = () => {
   
@@ -31,8 +32,6 @@ const UserAccountDetails = () => {
       });
   };
 
-  
-
   const handleDeleteAccount = () => {
     const path = location.pathname.split('/')[2];
     // Make a DELETE request to delete the user account
@@ -47,6 +46,7 @@ const UserAccountDetails = () => {
         // Handle error
         console.log('Error deleting account:', error);
       });
+      handleLogout();
   };
 
   const handleLogout = () => {

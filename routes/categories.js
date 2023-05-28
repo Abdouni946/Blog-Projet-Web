@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 router.get("/", async (req, res) => {
     try {
         const take = parseInt(req.query.take);
+        
         const skip = parseInt(req.query.skip);
         const categorys = await prisma.category.findMany({ take, skip, include : {  articles: true }});
         return res.json({ categorys });
@@ -16,6 +17,7 @@ router.get("/", async (req, res) => {
         return res.status(500).json({ message: `Server error: ${error}` });
     }
 })  
+
 
 router.get("/:id", async (req, res) => {
     try {

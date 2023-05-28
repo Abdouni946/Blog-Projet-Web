@@ -5,6 +5,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 export default function Posts() {
+    
     const location = useLocation();
     const path = location.pathname.split("/")[2];
     const [articles, setArticles] = useState([]);
@@ -27,7 +28,8 @@ export default function Posts() {
                     content={post.content}
                     createdAt={post.createdAt}
                     keyid={post.id} 
-                    categories={post.categories} />
+                    categories={post.categories}
+                     />
             ))}
         </div>
     );

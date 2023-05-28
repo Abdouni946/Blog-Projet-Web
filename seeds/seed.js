@@ -20,6 +20,7 @@ async function main() {
             },
         });
         console.log(`Created user with id: ${user.id}`);
+        console.log(user.password);
     }
     //admin
     const admin = await prisma.user.create({

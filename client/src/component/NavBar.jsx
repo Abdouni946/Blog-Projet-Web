@@ -1,23 +1,40 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 
 export default function Navbar() {
   const [user, setUser] = useState(false);
   const [userInfo, setUserInfo] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"))
+    const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setUser(true);
-      setUserInfo(storedUser)
+      setUserInfo(storedUser);
     }
-  }, []);
+
+    const intervalId = setInterval(() => {
+      const storedUserCheck = JSON.parse(localStorage.getItem("user"));
+      if (!storedUserCheck) {
+        setUser(false);
+        setRedirect(true);
+      }
+    }, 5000); // checks every 5 seconds, adjust as needed
+
+    return () => clearInterval(intervalId); // cleanup on unmount
+  }, [user]);
 
   const handleLogout = () => {
     // Perform logout logic here
     setUser(false);
     localStorage.removeItem("user");
+    setRedirect(true);
   };
+
+  
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
