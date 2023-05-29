@@ -36,5 +36,5 @@ Cela installera toutes les dépendances définies dans le fichier `package.json`
 2. Pour démarrer le backend, assurez-vous d'être dans le répertoire backend, puis exécutez:
 `npm start `
 
-3. Démarrer le front-end ,  Changez votre répertoire vers le répertoire frontend: cd/client , puis exécutez `npm start`
+3. Démarrer le front-end ,  Changez votre répertoire vers le répertoire frontend: `cd/client`  , puis exécutez `npm start`
 
